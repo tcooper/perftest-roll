@@ -1,0 +1,7 @@
+#%Module1.0
+module-whatis "collectl"
+module-whatis "Version: VERSION"
+module-whatis "Description: Collectl is a system monitoring tool."
+set collectlHome /opt/collectl
+setenv FILEBENCHHOME $collectlHome
+prepend-path PATH $collectlHome/usr/bin

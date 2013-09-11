@@ -1,0 +1,46 @@
+<?xml version="1.0" standalone="no"?>
+
+<kickstart>
+
+
+	<description>
+	SDSC HPC Group performance testing roll for Rocks Clusters.
+	</description>
+
+	<copyright>
+	Copyright (c) 2000 - 2012 The Regents of the University of California.
+	All rights reserved. Rocks(r) v5.5/v6.0 www.rocksclusters.org
+	
+	</copyright>
+
+	<changelog>
+	$Log$
+	</changelog>
+
+	<!-- Custom Built Packages -->
+	<package>collectl</package>
+	<package>collectl-modules</package>
+	<package>filebench</package>
+	<package>filebench-modules</package>
+	<package>fio</package>
+	<package>fio-modules</package>
+	<package>iozone</package>
+	<package>iozone-modules</package>
+	<package>ior</package>
+	<package>ior-modules</package>
+	<package>nfswatch</package>
+	<package>nfswatch-modules</package>
+
+	<!-- OS Included Packages -->
+	<package>wireshark</package>	
+	<package>wireshark-gnome</package>
+	<package>libpcap</package>
+	<package>libsmi</package>
+	<package>startup-notification</package>
+	<package>usermode-gtk</package>
+	<package>xcb-util</package>
+
+	<!-- Performance Testing Scripts -->
+        <package>perftest-scripts</package>
+
+</kickstart>
