@@ -22,4 +22,14 @@
 	<edge from="base">
 		<to>perftest-base</to>
 	</edge>
+    
+    <!-- enforce post section ordering -->
+    <!--
+     perftest-base post sections execute after base
+     post sections
+     -->
+    <order head="base">
+        <tail>perftest-base</tail>
+    </order>
+    
 </graph>
