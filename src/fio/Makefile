@@ -62,37 +62,26 @@ REDHAT.ROOT = $(CURDIR)/../../
 
 -include $(ROCKSROOT)/etc/Rules.mk
 include Rules.mk
+include pull.mk
 
-URL_PREFIX	:= http://localhost/sources/
-SRC_NAME	:= $(NAME)-$(VERSION)
-SRC_PKG_NAME	:= $(SRC_NAME).$(TARBALL_POSTFIX)
-HASH_SUFFIX	:= md5
-CURL		:= curl
-CURL_OPTS	:= -sLO
+RPM.EXTRAS      = "AutoReq: no"
 
-$(SRC_PKG_NAME) :
-	$(CURL) $(CURL_OPTS) $(URL_PREFIX)/$(SRC_PKG_NAME)
-	$(CURL) $(CURL_OPTS) $(URL_PREFIX)/$(SRC_PKG_NAME).$(HASH_SUFFIX)
-
-prep : $(SRC_PKG_NAME)
-	gunzip -c $(SRC_PKG_NAME) | $(TAR) -xf -
-
-build: prep
-	( 							\
-		cd $(NAME)-$(VERSION);				\
-		$(MAKE);					\
+build: $(SRC_DIRS)
+	( 						\
+	  cd $(SOURCE_DIR) ; 				\
+	  ./configure ;					\
+	  patch Makefile ../Makefile.patch ; 		\
+	  $(MAKE) ; 					\
 	)
+	@echo "::: Package $(NAME) build complete :::"
 	
 install::
-	mkdir -p $(ROOT)/$(PKGROOT)
-	(							\
-		cd $(NAME)-$(VERSION);				\
-		$(MAKE) prefix=$(ROOT)/$(PKGROOT) install;	\
+	mkdir -p $(ROOT)/$(PKGROOT)/$(NAME)
+	( 						\
+	  cd $(SOURCE_DIR) ; 				\
+	  $(MAKE) DESTDIR=$(ROOT)/$(PKGROOT) install ; 	\
 	)
+	@echo "::: Package $(NAME) install complete :::"
 
 clean::
-	rm -rf $(NAME)-$(VERSION)
-
-distclean : clean
-	rm -f $(SRC_PKG_NAME)
-	rm -r $(SRC_PKG_NAME).$(HASH_SUFFIX)
+	rm -rf $(SOURCE_DIR)

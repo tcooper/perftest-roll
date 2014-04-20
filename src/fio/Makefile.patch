@@ -1,0 +1,8 @@
+194d193
+< prefix = /usr/local
+198,199c197,198
+< mandir = /usr/share/man
+< sharedir = /usr/share/fio
+---
+> mandir = $(prefix)/share/man
+> sharedir = $(prefix)/share/fio
