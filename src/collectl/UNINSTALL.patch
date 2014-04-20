@@ -1,0 +1,10 @@
+28,31c28,31
+< BINDIR=$DESTDIR/usr/bin
+< DOCDIR=$DESTDIR/usr/share/doc/collectl
+< SHRDIR=$DESTDIR/usr/share/collectl
+< MANDIR=$DESTDIR/usr/share/man/man1
+---
+> BINDIR=$DESTDIR/bin
+> DOCDIR=$DESTDIR/share/doc/collectl
+> SHRDIR=$DESTDIR/share/collectl
+> MANDIR=$DESTDIR/share/man/man1
