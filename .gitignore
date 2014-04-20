@@ -3,4 +3,8 @@
 .tar.gz
 .tgz
 .zip
+BUILD
+RPMS
+SPECS
+SRPMS
 CVS
