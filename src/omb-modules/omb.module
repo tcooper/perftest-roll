@@ -1,0 +1,8 @@
+#%Module1.0
+module-whatis "omb"
+module-whatis "Version: VERSION"
+module-whatis "Description: The OSU Micro-Benchmarks are used to measure performance of MPI \
+communications operations."
+set ombHome /opt/omb
+setenv OMBHOME $ombHome
+prepend-path PATH $ombHome/bin
