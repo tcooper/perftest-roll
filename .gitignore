@@ -1,8 +1,8 @@
-.rpm
-.tar
-.tar.gz
-.tgz
-.zip
+*.rpm
+*.tar
+*.tar.gz
+*.tgz
+*.zip
 BUILD
 RPMS
 SPECS
