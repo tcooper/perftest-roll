@@ -3,5 +3,5 @@ module-whatis "fio"
 module-whatis "Version: VERSION"
 module-whatis "Description: fio is an I/O tool for benchmark and stress/hardware verification."
 set fioHome /opt/fio
-setenv FILEBENCHHOME $fioHome
+setenv FIOHOME $fioHome
 prepend-path PATH $fioHome/bin
