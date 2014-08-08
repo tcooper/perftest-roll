@@ -1,5 +1,6 @@
 *.rpm
 *.tar
+*.tar.bz2
 *.tar.gz
 *.tgz
 *.zip
@@ -8,3 +9,16 @@ RPMS
 SPECS
 SRPMS
 CVS
+# Dropped by Rock roll build process
+Rules-install.mk
+Rules-linux-centos.mk
+Rules-linux.mk
+Rules-rcfiles.mk
+Rules-scripts.mk
+Rules.mk
+_arch
+_distribution
+_os
+python.mk
+rocks-version-common.mk
+rocks-version.mk
