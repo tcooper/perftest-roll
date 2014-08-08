@@ -1,0 +1,23 @@
+#%Module1.0
+##
+## filebench modulefile
+##
+## modulefiles/
+##
+proc ModulesHelp { } {
+	global filebenchversion
+
+	puts stderr "\t Use /opt/filebench"
+	puts stderr "\n\tVersion $filebenchversion\n"
+}
+
+module-whatis "filebench"
+module-whatis "Version: VERSION"
+module-whatis "Description: filebench is a file system and storage benchmarking tool."
+
+# for Tcl script use only
+set	filebenchversion @VERSION@
+
+set filebenchHome /opt/filebench
+setenv FILEBENCHHOME $filebenchHome
+prepend-path PATH $filebenchHome/bin
