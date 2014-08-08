@@ -1,4 +1,3 @@
-PKGROOT            = /opt/fio
 NAME               = opt-fio
 VERSION            = 2.1.7
 RELEASE            = 0

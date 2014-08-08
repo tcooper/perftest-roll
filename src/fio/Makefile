@@ -58,6 +58,7 @@
 # $Log$
 #
 
+PKGROOT            = /opt/fio
 REDHAT.ROOT = $(CURDIR)/../../
 
 -include $(ROCKSROOT)/etc/Rules.mk
