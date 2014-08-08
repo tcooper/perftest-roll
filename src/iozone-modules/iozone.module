@@ -1,7 +1,0 @@
-#%Module1.0
-module-whatis "iozone"
-module-whatis "Version: VERSION"
-module-whatis "Description: IOzone is a filesystem benchmark tool."
-set iozoneHome /opt/iozone
-setenv FILEBENCHHOME $iozoneHome
-prepend-path PATH $iozoneHome/bin
