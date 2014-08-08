@@ -1,0 +1,24 @@
+#%Module1.0
+##
+## fio modulefile
+##
+## modulefiles/
+##
+proc ModulesHelp { } {
+	global fioversion
+
+	puts stderr "\t Use /opt/fio"
+	puts stderr "\n\tVersion $fioversion\n"
+}
+
+module-whatis "fio"
+module-whatis "Version: VERSION"
+module-whatis "Description: fio is a NFS server monitoring tool."
+
+# for Tcl script use only
+set	fioversion @VERSION@
+
+set fioHome /opt/fio
+setenv NFSWATCHHOME $fioHome
+prepend-path PATH $fioHome/bin
+prepend-path MANPATH $fioHome/man
