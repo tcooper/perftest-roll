@@ -62,51 +62,36 @@ REDHAT.ROOT = $(CURDIR)/../../
 
 -include $(ROCKSROOT)/etc/Rules.mk
 include Rules.mk
+include pull.mk
+
+RPM.EXTRAS      = "AutoReq: no"
 
 BINARIES	= iozone fileop Generate_Graphs gengnuplot.sh gnu3d.dem
 DOCS		= IOzone_msword_98.pdf Run_rules.doc IOzone_msword_98.doc \
 			Iozone_ps.gz 
-URL_PREFIX	:= http://localhost/sources/
-SRC_NAME	:= $(NAME)$(IOZONE_VERSION)
-SRC_PKG_NAME	:= $(SRC_NAME).$(TARBALL_POSTFIX)
-HASH_SUFFIX	:= md5
-CURL		:= curl
-CURL_OPTS	:= -sLO
 
-$(SRC_PKG_NAME) :
-	$(CURL) $(CURL_OPTS) $(URL_PREFIX)/$(SRC_PKG_NAME)
-	$(CURL) $(CURL_OPTS) $(URL_PREFIX)/$(SRC_PKG_NAME).$(HASH_SUFFIX)
-
-prep : $(SRC_PKG_NAME)
-
-build: prep
-	$(TAR) xf $(SRC_PKG_NAME)
+build: $(SRC_DIRS)
 	(								\
-		cd $(NAME)$(IOZONE_VERSION)/src/current;		\
+		cd $(SOURCE_DIR)/src/current;				\
 		$(MAKE) $(TARGET);					\
 	)
 
 install::
 	mkdir -p $(ROOT)/$(PKGROOT)/bin
 	(								\
-		cd $(NAME)$(IOZONE_VERSION)/src/current;		\
+		cd $(SOURCE_DIR)/src/current;				\
 		cp $(BINARIES) $(ROOT)/$(PKGROOT)/bin;			\
 	)
 	mkdir -p $(ROOT)/$(PKGROOT)/docs
 	(								\
-		cd $(NAME)$(IOZONE_VERSION)/docs;			\
+		cd $(SOURCE_DIR)/docs;					\
 		cp $(DOCS) $(ROOT)/$(PKGROOT)/docs;			\
 	)
 	(								\
-		cd $(NAME)$(IOZONE_VERSION)/src/current;		\
+		cd $(SOURCE_DIR)/src/current;				\
 		cp Gnuplot.txt $(ROOT)/$(PKGROOT)/docs;			\
 	)
 
 
 clean::
-	rm -rf $(NAME)$(IOZONE_VERSION)
-	rm -f $(NAME).spec.in
 
-distclean : clean
-	rm -f $(SRC_PKG_NAME)
-	rm -r $(SRC_PKG_NAME).$(HASH_SUFFIX)
