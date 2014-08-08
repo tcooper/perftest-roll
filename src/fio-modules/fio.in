@@ -13,7 +13,7 @@ proc ModulesHelp { } {
 
 module-whatis "fio"
 module-whatis "Version: VERSION"
-module-whatis "Description: fio is a NFS server monitoring tool."
+module-whatis "Description: fio is an I/O tool for benchmark and stress/hardware verification."
 
 # for Tcl script use only
 set	fioversion @VERSION@
