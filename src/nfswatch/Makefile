@@ -58,41 +58,28 @@
 # $Log$
 #
 
+
+PKGROOT	= /opt/nfswatch
 REDHAT.ROOT = $(CURDIR)/../../
 
 -include $(ROCKSROOT)/etc/Rules.mk
 include Rules.mk
+include pull.mk
 
-URL_PREFIX	:= http://localhost/sources/
-SRC_NAME	:= $(NAME)-$(VERSION)
-SRC_PKG_NAME	:= $(SRC_NAME).$(TARBALL_POSTFIX)
-HASH_SUFFIX	:= md5
-CURL		:= curl
-CURL_OPTS	:= -sLO
-
-$(SRC_PKG_NAME) :
-	$(CURL) $(CURL_OPTS) $(URL_PREFIX)/$(SRC_PKG_NAME)
-	$(CURL) $(CURL_OPTS) $(URL_PREFIX)/$(SRC_PKG_NAME).$(HASH_SUFFIX)
-
-prep : $(SRC_PKG_NAME)
-	gunzip -c $(SRC_PKG_NAME) | $(TAR) -xf -
-
-build: prep
+RPM.EXTRAS      = "AutoReq: no"
+	
+build: $(SRC_DIRS)
 	( 							\
-		cd $(NAME)-$(VERSION);				\
+		cd $(SOURCE_DIR);				\
 		$(MAKE);					\
 	)
 	
 install::
 	mkdir -p $(ROOT)/$(PKGROOT)
 	(							\
-		cd $(NAME)-$(VERSION);				\
-		$(MAKE) DESTDIR=$(ROOT)/$(PKGROOT) install;\
+		cd $(SOURCE_DIR);				\
+		$(MAKE) DESTDIR=$(ROOT)/$(PKGROOT) install;	\
 	)
 
 clean::
-	rm -rf $(NAME)-$(VERSION)
 
-distclean : clean
-	rm -f $(SRC_PKG_NAME)
-	rm -f $(SRC_PKG_NAME).$(HASH_SUFFIX)
