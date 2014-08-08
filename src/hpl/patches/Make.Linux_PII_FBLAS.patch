@@ -1,0 +1,49 @@
+--- Make.Linux_PII_FBLAS	2012-10-26 07:59:45.000000000 -0700
++++ Make.Linux_PII_FBLAS	2014-08-08 13:34:08.940752673 -0700
+@@ -67,7 +67,7 @@
+ # - HPL Directory Structure / HPL library ------------------------------
+ # ----------------------------------------------------------------------
+ #
+-TOPdir       = $(HOME)/hpl
++TOPdir       = /opt/hpl
+ INCdir       = $(TOPdir)/include
+ BINdir       = $(TOPdir)/bin/$(ARCH)
+ LIBdir       = $(TOPdir)/lib/$(ARCH)
+@@ -81,7 +81,7 @@
+ # header files,  MPlib  is defined  to be the name of  the library to be
+ # used. The variable MPdir is only used for defining MPinc and MPlib.
+ #
+-MPdir        = /usr/local/mpi
++MPdir        = /opt/openmpi
+ MPinc        = -I$(MPdir)/include
+ MPlib        = $(MPdir)/lib/libmpich.a
+ #
+@@ -92,9 +92,9 @@
+ # header files,  LAlib  is defined  to be the name of  the library to be
+ # used. The variable LAdir is only used for defining LAinc and LAlib.
+ #
+-LAdir        = $(HOME)/netlib/ARCHIVES/Linux_PII
++LAdir        = $(TOPdir)/GotoBLAS2
+ LAinc        =
+-LAlib        = $(LAdir)/libf77blas.a $(LAdir)/libatlas.a
++LAlib        = $(LAdir)/libgoto2.a -lm -L/usr/lib/gcc/i386-redhat-linux/4.1.2
+ #
+ # ----------------------------------------------------------------------
+ # - F77 / C interface --------------------------------------------------
+@@ -166,14 +166,14 @@
+ # - Compilers / linkers - Optimization flags ---------------------------
+ # ----------------------------------------------------------------------
+ #
+-CC           = /usr/bin/gcc
++CC           = $(MPIDIR)/bin/mpicc
+ CCNOOPT      = $(HPL_DEFS)
+ CCFLAGS      = $(HPL_DEFS) -fomit-frame-pointer -O3 -funroll-loops -W -Wall
+ #
+ # On some platforms,  it is necessary  to use the Fortran linker to find
+ # the Fortran internals used in the BLAS library.
+ #
+-LINKER       = /usr/bin/g77
++LINKER       = $(MPIDIR)/bin/mpif77
+ LINKFLAGS    = $(CCFLAGS)
+ #
+ ARCHIVER     = ar
