@@ -67,7 +67,7 @@ include pull.mk
 
 build: $(SRC_DIRS)
 	( 							\
-		cd $(NAME)-$(VERSION);				\
+		cd $(SOURCE_NAME)-$(SOURCE_VERSION);		\
 		./configure --prefix=$(PKGROOT);		\
 		$(MAKE);					\
 	)
@@ -75,7 +75,7 @@ build: $(SRC_DIRS)
 install::
 	mkdir -p $(ROOT)/$(PKGROOT)
 	(							\
-		cd $(NAME)-$(VERSION);				\
+		cd $(SOURCE_NAME)-$(SOURCE_VERSION);		\
 		$(MAKE) prefix=$(ROOT)/$(PKGROOT) install;	\
 	)
 
