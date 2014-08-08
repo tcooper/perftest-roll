@@ -64,14 +64,15 @@ include pull.mk
 
 build: $(SRC_DIRS)
 	( \
-	  cd $(GOTOBLAS_SOURCE_DIR); \
+	  mv $(LAPACK_SOURCE_PKG) $(GOTOBLAS_SOURCE_NAME); \
+	  cd $(GOTOBLAS_SOURCE_NAME); \
 	  ./quickbuild.64bit; \
 	  $(MAKE); \
 	  cd ..; \
-	  ln -s ./$(HPL_SOURCE_DIR) ./$(NAME); \
-	  cp -v $(NAME)/setup/Make.Linux_PII_FBLAS $(NAME)/; \
-	  patch $(NAME)/Make.Linux_PII_FBLAS patches/Make.Linux_PII_FBLAS.patch; \
-	  cd $(NAME); \
+	  ln -s ./$(HPL_SOURCE_NAME)-$(HPL_SOURCE_VERSION) ./$(HPL_SOURCE_NAME); \
+	  cd $(HPL_SOURCE_NAME); \
+	  cp -v setup/Make.Linux_PII_FBLAS ./; \
+	  patch Make.Linux_PII_FBLAS ../patches/Make.Linux_PII_FBLAS.patch; \
 	  $(MAKE) arch=Linux_PII_FBLAS; \
 	  cp bin/Linux_PII_FBLAS/HPL.dat bin/Linux_PII_FBLAS/HPL.dat.orig; \
 	  touch machines; \
@@ -87,4 +88,6 @@ install::
 	@echo "::: Package $(NAME) install complete :::"
 
 clean::
-
+	\rm -rf $(SRC_DIRS)
+	\rm -rf $(GOTOBLAS_SOURCE_NAME)
+	\rm $(HPL_SOURCE_NAME)
