@@ -1,7 +1,0 @@
-#%Module1.0
-module-whatis "filebench"
-module-whatis "Version: VERSION"
-module-whatis "Description: Filebench is a file system and storage benchmarking tool."
-set filebenchHome /opt/filebench
-setenv FILEBENCHHOME $filebenchHome
-prepend-path PATH $filebenchHome/bin
