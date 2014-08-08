@@ -1,7 +1,24 @@
 #%Module1.0
+##
+## nfswatch modulefile
+##
+## modulefiles/
+##
+proc ModulesHelp { } {
+	global nfswatchversion
+
+	puts stderr "\t Use /opt/nfswatch"
+	puts stderr "\n\tVersion $nfswatchversion\n"
+}
+
 module-whatis "nfswatch"
 module-whatis "Version: VERSION"
 module-whatis "Description: nfswatch is a NFS server monitoring tool."
+
+# for Tcl script use only
+set	nfswatchversion @VERSION@
+
 set nfswatchHome /opt/nfswatch
-setenv FILEBENCHHOME $nfswatchHome
+setenv NFSWATCHHOME $nfswatchHome
 prepend-path PATH $nfswatchHome/usr/sbin
+prepend-path MANPATH $nfswatchHome/usr/share/man

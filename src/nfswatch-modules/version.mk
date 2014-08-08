@@ -1,3 +1,9 @@
+# Get the nfswatch version from it's version.mk file. See Makefile
+VERSION.MK.MASTER = version.mk
+VERSION.MK.MASTER.DIR = ../nfswatch
+VERSION.MK.INCLUDE = nfswatch.version.mk
+
+include $(VERSION.MK.INCLUDE) 
 NAME		= nfswatch-modules
-VERSION		= 6.1
-RELEASE		= 0
+RELEASE		= 1
+RPM.REQUIRES	= environment-modules
