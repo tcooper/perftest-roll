@@ -58,26 +58,14 @@
 # $Log$
 #
 
+
 REDHAT.ROOT = $(CURDIR)/../../
 
 -include $(ROCKSROOT)/etc/Rules.mk
 include Rules.mk
+include pull.mk
 
-URL_PREFIX	:= http://localhost/sources/
-SRC_NAME	:= $(NAME)-$(VERSION)
-SRC_PKG_NAME	:= $(SRC_NAME).$(TARBALL_POSTFIX)
-HASH_SUFFIX	:= md5
-CURL		:= curl
-CURL_OPTS	:= -sLO
-
-$(SRC_PKG_NAME) :
-	$(CURL) $(CURL_OPTS) $(URL_PREFIX)/$(SRC_PKG_NAME)
-	$(CURL) $(CURL_OPTS) $(URL_PREFIX)/$(SRC_PKG_NAME).$(HASH_SUFFIX)
-
-prep : $(SRC_PKG_NAME)
-	gunzip -c $(SRC_PKG_NAME) | $(TAR) -xf -
-
-build: prep
+build: $(SRC_DIRS)
 	( 							\
 		cd $(NAME)-$(VERSION);				\
 		./configure --prefix=$(PKGROOT);		\
@@ -92,8 +80,3 @@ install::
 	)
 
 clean::
-	rm -rf $(NAME)-$(VERSION)
-
-distclean : clean
-	rm -f $(SRC_PKG_NAME)
-	rm -r $(SRC_PKG_NAME).$(HASH_SUFFIX)
