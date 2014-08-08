@@ -1,5 +1,4 @@
 NAME               = opt-filebench
-PKGROOT            = /opt/filebench
 VERSION            = 1.4.9.1
 RELEASE            = 0
 RPM.EXTRAS         = AutoReq:No

@@ -59,6 +59,7 @@
 #
 
 
+PKGROOT            = /opt/filebench
 REDHAT.ROOT = $(CURDIR)/../../
 
 -include $(ROCKSROOT)/etc/Rules.mk
