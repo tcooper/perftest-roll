@@ -1,4 +1,3 @@
-PKGROOT         = /opt/iozone
 NAME            = opt-iozone
 VERSION         = 3_428
 RELEASE         = 0

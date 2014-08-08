@@ -58,6 +58,7 @@
 # $Log$
 #
 
+PKGROOT         = /opt/iozone
 REDHAT.ROOT = $(CURDIR)/../../
 
 -include $(ROCKSROOT)/etc/Rules.mk
