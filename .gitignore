@@ -22,3 +22,7 @@ _os
 python.mk
 rocks-version-common.mk
 rocks-version.mk
+.rpmmacros
+*-modules.spec
+*-modules.spec.mk
+*.version.mk
