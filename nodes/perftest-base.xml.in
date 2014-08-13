@@ -30,6 +30,10 @@
 	<package>ior-modules</package>
 	<package>nfswatch</package>
 	<package>nfswatch-modules</package>
+	<package>omb_COMPILERNAME_ROLLMPI_ROLLNETWORK</package>
+	<package>omb-modules</package>
+	<package>imb_COMPILERNAME_ROLLMPI_ROLLNETWORK</package>
+	<package>imb-modules</package>
 
 	<!-- OS Included Packages -->
 	<package>wireshark</package>	

@@ -58,33 +58,20 @@
 # $Log$
 #
 
+PKGROOT = /opt/ior
 REDHAT.ROOT = $(CURDIR)/../../
-
 -include $(ROCKSROOT)/etc/Rules.mk
 include Rules.mk
+include pull.mk
 
 BINARIES	= IOR
 DOCS		= COPYRIGHT README RELEASE_LOG UNDOCUMENTED_OPTIONS USER_GUIDE
 SCRIPTS		= exampleScript  run_script.cnl  run_script.linux
 TESTING		= hintsFile  IOR-tester.py  IOR-tester.README
 
-URL_PREFIX	:= http://localhost/sources/
-SRC_NAME	:= $(NAME)-$(VERSION)
-SRC_PKG_NAME	:= $(SRC_NAME).$(TARBALL_POSTFIX)
-HASH_SUFFIX	:= md5
-CURL		:= curl
-CURL_OPTS	:= -sLO
-
-$(SRC_PKG_NAME) :
-	$(CURL) $(CURL_OPTS) $(URL_PREFIX)/$(SRC_PKG_NAME)
-	$(CURL) $(CURL_OPTS) $(URL_PREFIX)/$(SRC_PKG_NAME).$(HASH_SUFFIX)
-
-prep : $(SRC_PKG_NAME)
-	gunzip -c $(SRC_PKG_NAME) | $(TAR) -xf -
-
-build: prep
+build: $(SRC_DIRS)
 	( 								\
-		cd $(NAME)/src/C;					\
+		cd $(SOURCE_DIR)/src/C;					\
 		$(MAKE) mpiio;						\
 	)
 	
@@ -111,8 +98,3 @@ install::
 	)
 
 clean::
-	rm -rf $(NAME)
-
-distclean : clean
-	rm -f $(SRC_PKG_NAME)
-	rm -r $(SRC_PKG_NAME).$(HASH_SUFFIX)

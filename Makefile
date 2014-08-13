@@ -58,15 +58,53 @@
 # $Log$
 #
 
+ifndef ROLLCOMPILER
+  ROLLCOMPILER = gnu
+endif
+
+ifndef ROLLMPI
+  ROLLMPI = openmpi
+endif
+
+ifndef ROLLNETWORK
+  ROLLNETWORK = eth
+endif
+
 -include $(ROLLSROOT)/etc/Rolls.mk
 include Rolls.mk
 
-default: roll
+default: 
+	for i in `ls nodes/*.in`; do \
+	  export o=`echo $$i | sed 's/\.in//'`; \
+	  cp $$i $$o; \
+	  for c in $(ROLLCOMPILER); do \
+	    COMPILERNAME=`echo $$c | awk -F/ '{print $$1}'`; \
+	    perl -pi -e 'print and s/COMPILERNAME/'$${c}'/g if m/COMPILERNAME/' $$o; \
+	  done; \
+	  for n in $(ROLLNETWORK); do \
+	    perl -pi -e 'print and s/ROLLNETWORK/'$${n}'/g if m/ROLLNETWORK/' $$o; \
+	  done; \
+	  for m in $(ROLLMPI); do \
+	    perl -pi -e 'print and s/ROLLMPI/'$${m}'/g if m/ROLLMPI/' $$o; \
+	  done; \
+	  perl -pi -e '$$_ = "" if m/COMPILERNAME|ROLLNETWORK|ROLLMPI/' $$o; \
+	done
+	SKIP=''; \
+	if test -f packages_to_skip; then \
+	  SKIP=`sed 's/#.*//' packages_to_skip | tr '\n' ' '`; \
+	fi; \
+	echo $(MAKE) ROLLCOMPILER="$(ROLLCOMPILER)" ROLLNETWORK="$(ROLLNETWORK)" ROLLMPI="$(ROLLMPI)" ROLLPY="$(ROLLPY)" SKIP="$${SKIP}" roll; \
+	$(MAKE) ROLLCOMPILER="$(ROLLCOMPILER)" ROLLNETWORK="$(ROLLNETWORK)" ROLLMPI="$(ROLLMPI)" ROLLPY="$(ROLLPY)" SKIP="$${SKIP}" roll
 
 clean::
 	rm -f _arch bootstrap.py
 
 distclean: clean
-	rm -f build.log
+	for i in `ls nodes/*.in`; do \
+	  export o=`echo $$i | sed 's/\.in//'`; \
+	  rm -f $$o; \
+	done
+	rm -rf RPMS SRPMS src/build-*
+	-rm -f build.log
 	rm -rf RPMS
 	rm -rf SRPMS
