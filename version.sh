@@ -11,9 +11,11 @@ fi
 
 VERSION=`echo ${DESC} | awk '{ print $1 }' | tr "." " "`
 COMMIT=`echo ${DESC} | awk '{ print $2 }'`
+HASH=`echo ${DESC} | awk '{ print $3}'`
 VERSION_MAJ=`echo ${VERSION} | awk '{ print $1 }'`
 VERSION_MIN=`echo ${VERSION} | awk '{ print $2 }'`
 VERSION_REV=${COMMIT}
+VERSION_HASH=${HASH}
 if [ -z "${VERSION_REV}" ]; then
     VERSION_REV="0"
 fi
@@ -28,10 +30,15 @@ if [ -e localversion ]; then
     fi
 fi
 
-while getopts "mnr" opt; do
+while getopts "vmnrh" opt; do
     case $opt in
+	v)
+	   # Major.Minor Version
+	   echo "${VERSION_MAJ}.${VERSION_MIN}"
+	   exit 0
+	   ;;
         m)
-            # Major Version 
+            # Major Version
             echo "${VERSION_MAJ}"
             exit 0
             ;;
@@ -41,10 +48,15 @@ while getopts "mnr" opt; do
             exit 0
             ;;
         r)
-            # Revision Version 
+            # Revision Version
             echo "${VERSION_REV}"
             exit 0
             ;;
+	h)
+	    # Revision Hash
+	    echo "${VERSION_REV}.${VERSION_HASH}"
+	    exit 0
+	    ;;
         \?)
             echo "Invalid option: -$OPTARG" >&2
             exit 1
