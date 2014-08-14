@@ -1,0 +1,23 @@
+#%Module1.0
+##
+## ior modulefile
+##
+## modulefiles/
+##
+proc ModulesHelp { } {
+	global iorversion
+
+	puts stderr "\t Use /opt/ior"
+	puts stderr "\n\tVersion $iorversion\n"
+}
+
+module-whatis "ior"
+module-whatis "Version: VERSION"
+module-whatis "Description: ior is a parallel filesystem I/O benchmarking tool."
+
+# for Tcl script use only
+set	iorversion @VERSION@
+
+set iorHome /opt/ior
+setenv IORHOME $iorHome
+prepend-path PATH $iorHome/bin

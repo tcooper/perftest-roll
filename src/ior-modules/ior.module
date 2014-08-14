@@ -1,7 +1,0 @@
-#%Module1.0
-module-whatis "ior"
-module-whatis "Version: VERSION"
-module-whatis "Description: IOR software is a benchmarking tool for parallel file systems using POSIX, MPIIO, or HDF5 interfaces."
-set iorHome /opt/ior
-setenv FILEBENCHHOME $iorHome
-prepend-path PATH $iorHome/bin
