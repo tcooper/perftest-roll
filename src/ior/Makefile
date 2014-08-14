@@ -58,43 +58,27 @@
 # $Log$
 #
 
+
 PKGROOT = /opt/ior
 REDHAT.ROOT = $(CURDIR)/../../
+
 -include $(ROCKSROOT)/etc/Rules.mk
 include Rules.mk
 include pull.mk
 
-BINARIES	= IOR
-DOCS		= COPYRIGHT README RELEASE_LOG UNDOCUMENTED_OPTIONS USER_GUIDE
-SCRIPTS		= exampleScript  run_script.cnl  run_script.linux
-TESTING		= hintsFile  IOR-tester.py  IOR-tester.README
-
 build: $(SRC_DIRS)
-	( 								\
-		cd $(SOURCE_DIR)/src/C;					\
-		$(MAKE) mpiio;						\
+	( 							\
+		cd $(SOURCE_DIR);				\
+		./bootstrap;					\
+		./configure --prefix=$(PKGROOT);	\
+		$(MAKE);					\
 	)
 	
 install::
-	mkdir -p $(ROOT)/$(PKGROOT)/bin
-	(								\
-		cd $(NAME)/src/C;					\
-		cp $(BINARIES) $(ROOT)/$(PKGROOT)/bin;			\
-	)
-	mkdir -p $(ROOT)/$(PKGROOT)/docs;
-	(								\
-		cd $(NAME);						\
-		cp $(DOCS) $(ROOT)/$(PKGROOT)/docs;			\
-	)
-	mkdir -p $(ROOT)/$(PKGROOT)/scripts;
-	(								\
-		cd $(NAME)/scripts;					\
-		cp $(SCRIPTS) $(ROOT)/$(PKGROOT)/scripts;		\
-	)
-	mkdir -p $(ROOT)/$(PKGROOT)/testing;
-	(								\
-		cd $(NAME)/testing;					\
-		cp $(TESTING) $(ROOT)/$(PKGROOT)/testing;		\
+	mkdir -p $(ROOT)/$(PKGROOT)
+	(							\
+		cd $(SOURCE_DIR);				\
+		$(MAKE) prefix=$(ROOT)/$(PKGROOT) install;	\
 	)
 
 clean::
