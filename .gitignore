@@ -10,6 +10,8 @@ SPECS
 SRPMS
 CVS
 # Dropped by Rock roll build process
+roll-profile.mk
+Rolls.mk
 Rules-install.mk
 Rules-linux-centos.mk
 Rules-linux.mk
@@ -23,6 +25,6 @@ python.mk
 rocks-version-common.mk
 rocks-version.mk
 .rpmmacros
-*-modules.spec
-*-modules.spec.mk
+*.spec
+*.spec.mk
 *.version.mk
