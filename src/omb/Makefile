@@ -56,6 +56,7 @@
 #
 # $Log$
 
+PKGROOT            = /opt/omb
 REDHAT.ROOT = $(CURDIR)/../../
 
 -include $(ROCKSROOT)/etc/Rules.mk
@@ -63,13 +64,18 @@ include Rules.mk
 include pull.mk
 
 build: $(SRC_DIRS)
+	( \
+	  cd $(SOURCE_DIR); \
+	  ./configure --prefix=$(PKGROOT); \
+	  $(MAKE); \
+	)
 	@echo "::: Package $(NAME) build complete :::"
 	
 install::
 	mkdir -p $(ROOT)/$(PKGROOT)
 	( \
 	  cd $(SOURCE_DIR); \
-	  cp -r * $(ROOT)/$(PKGROOT) \
+	  $(MAKE) prefix=$(ROOT)/$(PKGROOT) install; \
 	)
 	@echo "::: Package $(NAME) install complete :::"
 
