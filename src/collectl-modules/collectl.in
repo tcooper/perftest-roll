@@ -1,0 +1,24 @@
+#%Module1.0
+##
+## collectl modulefile
+##
+## modulefiles/
+##
+proc ModulesHelp { } {
+	global collectlversion
+
+	puts stderr "\t Use /opt/collectl"
+	puts stderr "\n\tVersion $collectlversion\n"
+}
+
+module-whatis "collectl"
+module-whatis "Version: VERSION"
+module-whatis "Description: Collectl is a system monitoring tool."
+
+# for Tcl script use only
+set	collectlversion @VERSION@
+
+set collectlHome /opt/collectl
+setenv COLLECTLHOME $collectlHome
+prepend-path PATH $collectlHome/usr/bin
+prepend-path MANPATH $collectlHome/man
