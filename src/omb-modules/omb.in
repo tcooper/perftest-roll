@@ -1,0 +1,25 @@
+#%Module1.0
+##
+## omb modulefile
+##
+## modulefiles/
+##
+proc ModulesHelp { } {
+	global ombversion
+
+	puts stderr "\t Use /opt/omb"
+	puts stderr "\n\tVersion $ombversion\n"
+}
+
+module-whatis "omb"
+module-whatis "Version: VERSION"
+module-whatis "Description: OMB is the OSU Micro-Benchmarks Suite."
+
+# for Tcl script use only
+set	ombversion @VERSION@
+
+set ombHome /opt/omb
+setenv OMBHOME $ombHome
+prepend-path PATH $ombHome/libexec/osu-micro-benchmarks/mpi/pt2pt
+prepend-path PATH $ombHome/libexec/osu-micro-benchmarks/mpi/one-sided
+prepend-path PATH $ombHome/libexec/osu-micro-benchmarks/mpi/collective

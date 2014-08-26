@@ -58,20 +58,32 @@
 # $Log$
 #
 
+PKGROOT = /usr/share/Modules/modulefiles
 REDHAT.ROOT = $(CURDIR)/../../
-PKGROOT = /opt/modulefiles/applications/omb
+RPM.PREFIX = $(PKGROOT)
 
 -include $(ROCKSROOT)/etc/Rules.mk
 include Rules.mk
 
-build:
+MODULESFILES = omb
 
-install::
-	  mkdir -p $(ROOT)/$(PKGROOT)
-	  cp omb.module $(ROOT)/$(PKGROOT)/$(VERSION)
-	  cp omb.version $(ROOT)/$(PKGROOT)/.version.$(VERSION)
-	  perl -pi -e 's/VERSION/$(VERSION)/g' $(ROOT)/$(PKGROOT)/$(VERSION)
-	  perl -pi -e 's/VERSION/$(VERSION)/g' $(ROOT)/$(PKGROOT)/.version.$(VERSION)
-	  ln -s $(PKGROOT)/.version.$(VERSION) $(ROOT)/$(PKGROOT)/.version
+%: %.in
+	$(SED) $(SEDSCRIPT) $^ > $@
+
+pretar:: $(VERSION.MK.INCLUDE)
+
+$(VERSION.MK.INCLUDE): 
+	if [ -f $(VERSION.MK.MASTER.DIR)/$(VERSION.MK.MASTER) ]; then \
+		/bin/cp $(VERSION.MK.MASTER.DIR)/$(VERSION.MK.MASTER) $@; \
+	fi
+
+build: $(MODULESFILES)
+
+install:: $(MODULESFILES)
+	mkdir -p $(ROOT)/$(PKGROOT)
+	install -m 755 $(MODULESFILES) $(ROOT)/$(PKGROOT)
 
 clean::
+	rm -rf $(NAME).spec.in
+	rm -rf $(MODULESFILES)
+	rm -rf $(VERSION.MK.INCLUDE)
