@@ -56,6 +56,7 @@
 #
 # $Log$
 
+PKGROOT            = /opt/intel/imb
 REDHAT.ROOT = $(CURDIR)/../../
 
 -include $(ROCKSROOT)/etc/Rules.mk
@@ -63,15 +64,27 @@ include Rules.mk
 include pull.mk
 
 build: $(SRC_DIRS)
+	( \
+	  cd $(SOURCE_NAME)/src; \
+	  sed -i 's,mpiicc,mpicc,g' ./make_ict; \
+	  $(MAKE) -f ./make_ict IMB-MPI1; \
+	  $(MAKE) -f ./make_ict IMB-EXT; \
+	  $(MAKE) -f ./make_ict IMB-IO; \
+	)
 	@echo "::: Package $(NAME) build complete :::"
 	
 install::
 	mkdir -p $(ROOT)/$(PKGROOT)
+	mkdir -p $(ROOT)/$(PKGROOT)/bin
 	( \
-	  cd $(SOURCE_DIR); \
-	  cp -r * $(ROOT)/$(PKGROOT) \
+	  cd $(SOURCE_NAME); \
+	  cp -r --parents ./doc $(ROOT)/$(PKGROOT); \
+	  cp -r --parents ./license $(ROOT)/$(PKGROOT); \
+	  cp ./src/IMB-IO $(ROOT)/$(PKGROOT)/bin; \
+	  cp ./src/IMB-EXT $(ROOT)/$(PKGROOT)/bin; \
+	  cp ./src/IMB-MPI1 $(ROOT)/$(PKGROOT)/bin; \
 	)
 	@echo "::: Package $(NAME) install complete :::"
 
 clean::
-
+	rm -rf $(SOURCE_NAME)
