@@ -1,8 +1,0 @@
-#%Module1.0
-module-whatis "hpl"
-module-whatis "Version: VERSION"
-module-whatis "Description: The Linpack Benchmark (HPL) solves a (random) dense linear system in \
-double precision (64 bits) arithmetic on distributed-memory computers."
-set hplHome /opt/hpl
-setenv HPLHOME $hplHome
-prepend-path PATH $hplHome/bin
