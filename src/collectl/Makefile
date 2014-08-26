@@ -58,6 +58,7 @@
 # $Log$
 #
 
+PKGROOT     = /opt/collectl
 REDHAT.ROOT = $(CURDIR)/../../
 
 -include $(ROCKSROOT)/etc/Rules.mk
@@ -75,7 +76,7 @@ install::
 	mkdir -p $(ROOT)/$(PKGROOT)
 	( \
 	  cd $(SOURCE_DIR); 				\
-	  DESTDIR=$(PKGROOT) ./INSTALL; 		\
+	  DESTDIR=$(ROOT)/$(PKGROOT) ./INSTALL;		\
 	)
 	@echo "::: Package $(NAME) install complete :::"
 
