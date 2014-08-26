@@ -19,6 +19,6 @@ module-whatis "Description: fio is an I/O tool for benchmark and stress/hardware
 set	fioversion @VERSION@
 
 set fioHome /opt/fio
-setenv NFSWATCHHOME $fioHome
+setenv FIOHOME $fioHome
 prepend-path PATH $fioHome/bin
 prepend-path MANPATH $fioHome/man
