@@ -18,21 +18,21 @@
 	</changelog>
 
 	<!-- Custom Built Packages -->
-	<package>collectl</package>
+	<package>opt-collectl</package>
 	<package>collectl-modules</package>
-	<package>filebench</package>
+	<package>opt-filebench</package>
 	<package>filebench-modules</package>
-	<package>fio</package>
+	<package>opt-fio</package>
 	<package>fio-modules</package>
-	<package>iozone</package>
+	<package>opt-iozone</package>
 	<package>iozone-modules</package>
-	<package>ior</package>
+	<package>opt-ior</package>
 	<package>ior-modules</package>
-	<package>nfswatch</package>
+	<package>opt-nfswatch</package>
 	<package>nfswatch-modules</package>
-	<package>omb_COMPILERNAME_ROLLMPI_ROLLNETWORK</package>
+	<package>opt-omb_COMPILERNAME_ROLLMPI_ROLLNETWORK</package>
 	<package>omb-modules</package>
-	<package>imb_COMPILERNAME_ROLLMPI_ROLLNETWORK</package>
+	<package>opt-imb_COMPILERNAME_ROLLMPI_ROLLNETWORK</package>
 	<package>imb-modules</package>
 
 	<!-- OS Included Packages -->
