@@ -1,8 +1,0 @@
-#%Module1.0
-module-whatis "imb"
-module-whatis "Version: VERSION"
-module-whatis "Description: The Intel MPI Benchmarks perform a set of MPI performance measurements \
-for point-to-point global communication operations for a range of messages sizes."
-set imbHome /opt/imb
-setenv IMBHOME $imbHome
-prepend-path PATH $imbHome/bin

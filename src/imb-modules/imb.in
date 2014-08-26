@@ -1,0 +1,23 @@
+#%Module1.0
+##
+## imb modulefile
+##
+## modulefiles/
+##
+proc ModulesHelp { } {
+	global imbversion
+
+	puts stderr "\t Use /opt/imb"
+	puts stderr "\n\tVersion $imbversion\n"
+}
+
+module-whatis "imb"
+module-whatis "Version: VERSION"
+module-whatis "Description: IMB is the Intel MPI Benchmark Suite."
+
+# for Tcl script use only
+set	imbversion @VERSION@
+
+set imbHome /opt/intel/imb
+setenv IMBHOME $imbHome
+prepend-path PATH $imbHome/bin
