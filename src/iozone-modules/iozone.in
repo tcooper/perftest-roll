@@ -19,5 +19,5 @@ module-whatis "Description: iozone is a filesystem benchmark tool."
 set	iozoneversion @VERSION@
 
 set iozoneHome /opt/iozone
-setenv NFSWATCHHOME $iozoneHome
+setenv IOZONEHOME $iozoneHome
 prepend-path PATH $iozoneHome/bin
